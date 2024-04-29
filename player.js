@@ -23,7 +23,7 @@ class Player{
         //bottom boudary
         if(this.isTouchingBottom()){
             this.y = this.game.height -this.height;
-            console.log(this.speedY);
+            
         }
     }
 
