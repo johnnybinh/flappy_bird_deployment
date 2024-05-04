@@ -8,7 +8,7 @@ class Game{
         this.ratio = this.height/this.baseHeight;
         this.background = new Background(this);
         this.obstacles = [];
-        this.numberOfObstacles = 12;
+        this.numberOfObstacles = 10;
         this.player = new Player(this);
         this.gravity;
         this.speed;
@@ -40,6 +40,8 @@ class Game{
         this.canvas.height = height;
         this.ctx.font = '15px Bungee';
         this.ctx.textAlign = 'right';
+        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = 'white';
         this.width = this.canvas.width;
         this.height = this.canvas.height;
         this.ratio = this.height/this.baseHeight;
@@ -58,7 +60,7 @@ class Game{
     
     }
     render(deltaTime){
-        this.timer += deltaTime;
+        if(!this.gameOver) this.timer += deltaTime;
         this.background.update();
         this.background.draw();
         this.drawStatusText();
@@ -88,6 +90,11 @@ class Game{
         this.ctx.fillText("Score: "+ this.score, this.width - 10 , 30);
         this.ctx.textAlign = 'left';
         this.ctx.fillText("Timer: "+ this.formatTimer() , 10 , 30);
+        if(this.gameOver){
+            this.ctx.textAlign = 'center';
+            this.ctx.font = '50px Bungee';
+            this.ctx.fillText('GAME OVER', this.width*0.5, this.height*0.5);
+        }
         this.ctx.restore();
     }
 }
@@ -108,7 +115,7 @@ window.addEventListener("load", function(){
         lastTime = timeStamp;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         game.render(deltaTime);
-        if(!game.gameOver)requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
     }
     requestAnimationFrame(animate);
 });

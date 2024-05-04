@@ -5,6 +5,9 @@ class Player{
         this.y;
         this.spriteWidth = 200;
         this.spriteHeight = 200;
+        this.collisionX;
+        this.collisionY;
+        this.collisionRadius = this.scaledWidth*0.5; 
         this.width;
         this.height;
         this.speedY;
@@ -12,10 +15,15 @@ class Player{
     }
     draw(){
         this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.game.ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
+        this.game.ctx.beginPath();
+        this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);
+        this.game.ctx.stroke();
     }
 
     update(){
         this.y += this.speedY;
+        this.collisionY = this.y + this.height * 0.5;
         if(this.y < this.game.height - this.height){
             this.y +=this.game.gravity;
             this.speedY += this.game.gravity;
@@ -33,6 +41,8 @@ class Player{
         this.y = this.game.height*0.5 - this.height*0.5;
         this.speedY = -8 * this.game.ratio;
         this.flapSpeed = 5*this.game.ratio;
+        this.collisionRadius = this.width * 0.5
+        this.collisionX = this.x + this.width * 0.5;
     }
     isTouchingTop(){
         return this.y <=0;
