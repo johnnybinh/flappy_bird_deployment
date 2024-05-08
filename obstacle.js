@@ -29,6 +29,10 @@ class Obstacle{
             this.game.score++;
             if(this.game.obstacles.length <= 0 ) this.game.gameOver = true;
         }
+        if (this.game.checkCollision(this.game.player, this)){
+            this.game.gameOver = true;
+            this.game.player.collided = true;
+        }
 
     }
     draw(){

@@ -14,9 +14,12 @@ class Game{
         this.speed;
         this.gameOver;
         this.timer;
+        this.message1;
+        this.message2;
 
         this.resize(window.innerWidth, window.innerHeight);
 
+//--------------------------------------------------------------------------------------------------------------------------    
     // resize the canvas as we resize the window
         window.addEventListener("resize", e => {
             this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
@@ -81,6 +84,13 @@ class Game{
             this.obstacles.push(new Obstacle(this, firstX + i * obstacleSpacing));
         }
     }
+    checkCollision(a, b){
+        const dx = a.collisionX - b.collisionX;
+        const dy = a.collisionY - b.collisionY;
+        const distance = Math.hypot(dx, dy);
+        const sumOfRadii = a.collisionRadius + b.collisionRadius;
+        return distance <= sumOfRadii;
+    }
     formatTimer(){
         return (this.timer* 0.001).toFixed(1)
     }
@@ -91,13 +101,28 @@ class Game{
         this.ctx.textAlign = 'left';
         this.ctx.fillText("Timer: "+ this.formatTimer() , 10 , 30);
         if(this.gameOver){
+            if(this.player.collided){
+                this.message1 = "Getting rusty?";
+                this.message2 = "Collision time " + this.formatTimer() + " seconds";
+            }else if(this.obstacles.length <=0){
+                this.message1 = "You nailed it!";
+                this.message2 = "Can you do it faster than " + this.formatTimer() + " seconds?";
+            }
             this.ctx.textAlign = 'center';
             this.ctx.font = '50px Bungee';
-            this.ctx.fillText('GAME OVER', this.width*0.5, this.height*0.5);
+            this.ctx.fillText(this.message1, this.width*0.5, this.height*0.5 -40);
+            this.ctx.font = '15px Bungee';
+            this.ctx.fillText(this.message2, this.width*0.5, this.height*0.5 -20);
+            this.ctx.fillText("Press 'R' to try again!", this.width*0.5, this.height*0.5);
         }
+        for (let i =0; i<this.player.energy; i++){
+            this.ctx.fillRect(10 + i * 6, 40, 5, 15);
+        }
+        
         this.ctx.restore();
+       }
     }
-}
+
 //--------------------------------------------------------------------------------------------------------------------------
 
 window.addEventListener("load", function(){

@@ -7,11 +7,14 @@ class Player{
         this.spriteHeight = 200;
         this.collisionX;
         this.collisionY;
-        this.collisionRadius = this.scaledWidth*0.5; 
-        this.width;
+        this.collisionRadius;
         this.height;
         this.speedY;
         this.flapSpeed;
+        this.collided;
+        this.energy = 30;
+        this.maxEnergy = this.energy* 2;
+        this.minEnregy = 15
     }
     draw(){
         this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -43,6 +46,7 @@ class Player{
         this.flapSpeed = 5*this.game.ratio;
         this.collisionRadius = this.width * 0.5
         this.collisionX = this.x + this.width * 0.5;
+        this.collided = false;
     }
     isTouchingTop(){
         return this.y <=0;
