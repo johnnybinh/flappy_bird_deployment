@@ -28,7 +28,7 @@ class Obstacle{
                 this.speedY *= -1;
             }
         }else{
-            this.speedY +=1;
+            this.speedY +=2;
         }
        
         if(this.isOffScreen()){
@@ -49,7 +49,7 @@ class Obstacle{
         this.game.ctx.drawImage(this.image, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight);
         this.game.ctx.beginPath();
         this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);
-        //this.game.ctx.stroke();
+        this.game.ctx.stroke();
     }
     resize(){
         this.scaledWidth = this.spriteWidth * this.game.ratio;

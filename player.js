@@ -25,7 +25,7 @@ class Player{
         this.game.ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
         this.game.ctx.beginPath();
         this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);
-        //this.game.ctx.stroke();
+        this.game.ctx.stroke();
     }
 
     update(){
@@ -45,6 +45,8 @@ class Player{
               // Handle collision logic (e.g., decrease energy, play sound effect)
             }
           }
+        if (this.collided) this.frameY = 4;
+        
         //bottom boudary
         if(this.isTouchingBottom()){
             this.y = this.game.height -this.height;
@@ -59,7 +61,7 @@ class Player{
         this.y = this.game.height*0.5 - this.height*0.5;
         this.speedY = -8 * this.game.ratio;
         this.flapSpeed = 5*this.game.ratio;
-        this.collisionRadius = 40 * this.game.ratio;
+        this.collisionRadius = 62 * this.game.ratio;
         this.collisionX = this.x + this.width * 0.5;
         this.collided = false;
         this.barSize = Math.floor(10*this.game.ratio);
