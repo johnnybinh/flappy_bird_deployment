@@ -8,7 +8,7 @@ class Game{
         this.ratio = this.height/this.baseHeight;
         this.background = new Background(this);
         this.obstacles = [];
-        this.numberOfObstacles = 10;
+        this.numberOfObstacles = 20;
         this.player = new Player(this);
         this.gravity;
         this.speed;
@@ -18,7 +18,11 @@ class Game{
         this.timer;
         this.message1;
         this.message2;
-        this.barSize;
+        this.eventUpdate = false;
+        this.eventTimer = 0;
+        this.eventInterval = 150;
+        
+
 
 
         this.resize(window.innerWidth, window.innerHeight);
@@ -32,14 +36,30 @@ class Game{
         this.canvas.addEventListener("mousedown", e => {
             this.player.flap(); 
         });
+        this.canvas.addEventListener("mouseup", e => {
+            this.player.wingsUp(); 
+        });
         // keyboard controls
         window.addEventListener("keydown", e => {
-            console.log(e.key);
+            
             if (e.key === " ") {
                 this.player.flap();
             }
             if (e.key === "Shift" || e.key.toLowerCase() === "c") {
                 this.player.startCharge();
+            }
+            if(e.key.toLowerCase() === "r"){
+                this.resize(window.innerWidth, window.innerHeight);
+            }
+        });
+
+        window.addEventListener("keyup", e => {
+            if (e.key === " ") {
+                this.player.speedY+= 1;
+                this.player.wingsUp();
+            }
+            if (e.key === "Shift" || e.key.toLowerCase() === "c") {
+                this.player.stopCharge();
             }
         });
 }
@@ -74,6 +94,7 @@ class Game{
     }
     render(deltaTime){
         if(!this.gameOver) this.timer += deltaTime;
+        this.handlePeriodicEvent(deltaTime)
         this.background.update();
         this.background.draw();
         this.drawStatusText();
@@ -105,6 +126,14 @@ class Game{
         return (this.timer* 0.001).toFixed(1)
     }
 
+    handlePeriodicEvent(deltaTime){
+        if(this.eventTimer < this.eventInterval)
+            this.eventTimer += deltaTime;
+        else{
+            this.eventTimer = this.eventInterval%this.eventTimer;
+            this.eventUpdate = true;
+        }
+    }
     drawStatusText(){
         this.ctx.save();
         this.ctx.fillText("Score: "+ this.score, this.width - 10 , 30);
@@ -112,25 +141,32 @@ class Game{
         this.ctx.fillText("Timer: "+ this.formatTimer() , 10 , 30);
         if(this.gameOver){
             if(this.player.collided){
+                this.player.getHit();
                 this.message1 = "Getting rusty?";
                 this.message2 = "Collision time " + this.formatTimer() + " seconds";
             }else if(this.obstacles.length <=0){
                 this.message1 = "You nailed it!";
                 this.message2 = "Can you do it faster than " + this.formatTimer() + " seconds?";
+            }else if(this.player.isTouchingBottom){
+                this.player.getHit();
+                this.message1 = "Are you OK?";
+                this.message2 = "Can you do it better than " + this.formatTimer() + " seconds?";
             }
             this.ctx.textAlign = 'center';
             this.ctx.font = '50px Bungee';
+            this.ctx.fillStyle = 'white';
             this.ctx.fillText(this.message1, this.width*0.5, this.height*0.5 -40);
-            this.ctx.font = '15px Bungee';
+            this.ctx.font = '20px Bungee';
+            this.ctx.fillStyle = 'white';
             this.ctx.fillText(this.message2, this.width*0.5, this.height*0.5 -20);
             this.ctx.fillText("Press 'R' to try again!", this.width*0.5, this.height*0.5);
         }
         if(this.player.energy <= 20) this.ctx.fillStyle = 'red';
-        else if(this.player.energy >= this.player.maxEnergy) this.ctx.fillStyle = 'green';
+        else if(this.player.energy > 20 && this.player.energy <= 50) this.ctx.fillStyle = 'orange';
+        else this.ctx.fillStyle = 'green';
         for (let i = 0; i < this.player.energy; i++){
-            this.ctx.fillRect(10, this.height - 10 - i*this.player.barSize, this.player.barSize, this.player.barSize);
+            this.ctx.fillRect(10, this.height - 10 - i*this.player.barSize, this.player.barSize*3, this.player.barSize*1.5);
         }
-        
         
         this.ctx.restore();
        }

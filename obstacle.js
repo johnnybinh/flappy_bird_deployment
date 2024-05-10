@@ -1,8 +1,8 @@
 class Obstacle{
     constructor(game, x){
         this.game = game;
-        this.spriteWidth = 120;
-        this.spriteHeight = 120;
+        this.spriteWidth = 180;
+        this.spriteHeight = 180;
         this.scaledWidth = this.spriteWidth * this.game.ratio;
         this.scaledHeight = this.spriteHeight * this.game.ratio;
         this.x = x;
@@ -12,6 +12,8 @@ class Obstacle{
         this.collisionRadius = this.scaledWidth*0.5; 
         this.speedY = Math.random() <0.5? -1 * this.game.ratio : 1*this.game.ratio;
         this.markedForDeletion = false;
+        this.image = document.getElementById("obstacle");
+        this.frameX = Math.floor(Math.random()*4);
     }
 
     update(){
@@ -19,9 +21,16 @@ class Obstacle{
         this.y += this.speedY;
         this.collisionX = this.x + this.scaledWidth*0.5;
         this.collisionY = this.y + this.scaledHeight * 0.5
-        if(this.y <= 0 || this.y >= this.game.height - this.scaledHeight){
-            this.speedY *= -1;
+
+        if(!this.game.gameOver){ 
+            if(this.y <= 0 || this.y >= this.game.height - this.scaledHeight)
+            {
+                this.speedY *= -1;
+            }
+        }else{
+            this.speedY +=1;
         }
+       
         if(this.isOffScreen()){
             this.markedForDeletion = true;
             this.game.obstacles = this.game.obstacles.filter(obstacle => !obstacle.markedForDeletion);
@@ -32,20 +41,21 @@ class Obstacle{
         if (this.game.checkCollision(this.game.player, this)){
             this.game.gameOver = true;
             this.game.player.collided = true;
+            this.game.player.stopCharge();
         }
 
     }
     draw(){
-        this.game.ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
+        this.game.ctx.drawImage(this.image, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight);
         this.game.ctx.beginPath();
         this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);
-        this.game.ctx.stroke();
+        //this.game.ctx.stroke();
     }
     resize(){
         this.scaledWidth = this.spriteWidth * this.game.ratio;
         this.scaledHeight = this.spriteHeight * this.game.ratio;
     }
     isOffScreen(){
-        return this.x<0;
+        return this.x < -this.scaledWidth || this.y < -this.scaledHeight;y > this.scaledHeight;
     }
 }
