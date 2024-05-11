@@ -141,7 +141,7 @@ class Game{
         if(this.gameOver){
             if(this.player.collided){
                 this.message1 = "Getting rusty?";
-                this.message2 = "Collision time is: " + this.formatTimer() + " seconds";
+                this.message2 = "Collision time is " + this.formatTimer() + " seconds";
             }else if(this.obstacles.length <=0){
                 this.message1 = "You nailed it!";
                 this.message2 = "Can you do it faster than " + this.formatTimer() + " seconds?";
