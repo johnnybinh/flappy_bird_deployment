@@ -8,8 +8,9 @@ class Game{
         this.ratio = this.height/this.baseHeight;
         this.background = new Background(this);
         this.obstacles = [];
-        this.numberOfObstacles = 20;
+        this.numberOfObstacles = 50;
         this.player = new Player(this);
+        this.audio = new Audio();
         this.gravity;
         this.speed;
         this.minSpeed;
@@ -33,6 +34,7 @@ class Game{
         // mouse controls
         this.canvas.addEventListener("mousedown", e => {
             this.player.flap(); 
+            
         });
         this.canvas.addEventListener("mouseup", e => {
             this.player.wingsUp(); 
@@ -41,6 +43,7 @@ class Game{
         window.addEventListener("keydown", e => {
             
             if (e.key === " ") {
+                
                 this.player.flap();
             }
             if (e.key === "Shift" || e.key.toLowerCase() === "c") {
@@ -65,6 +68,7 @@ class Game{
     
     // scale all variables as changing screen size
     resize(width, height){
+
         this.canvas.width = width;
         this.canvas.height = height;
         this.ctx.font = '25px Bungee';
@@ -76,7 +80,7 @@ class Game{
         this.ratio = this.height/this.baseHeight;
         
         this.gravity = 0.15 * this.ratio;
-        this.speed = 4*this.ratio;
+        this.speed = 5*this.ratio;
         this.minSpeed = this.speed;
         this.maxSpeed = this.speed * 5;
         this.background.resize();
@@ -91,7 +95,10 @@ class Game{
     
     }
     render(deltaTime){
-        if(!this.gameOver) this.timer += deltaTime;
+       
+        if(!this.gameOver) {this.timer += deltaTime;
+            this.audio.playMainTheme();
+        }
         this.handlePeriodicEvent(deltaTime)
         this.background.update();
         this.background.draw();
@@ -141,9 +148,12 @@ class Game{
         this.ctx.fillText("Timer: "+ this.formatTimer() , 10 , 30);
         if(this.gameOver){
             if(this.player.collided){
+                this.audio.hit.play(); 
+                this.audio.gameOver.play();
                 this.message1 = "Getting rusty?";
                 this.message2 = "Collision time is " + this.formatTimer() + " seconds";
             }else if(this.obstacles.length <=0){
+                this.audio.win.play();
                 this.message1 = "You nailed it!";
                 this.message2 = "Can you do it faster than " + this.formatTimer() + " seconds?";
             }else if(this.player.isTouchingBottom){

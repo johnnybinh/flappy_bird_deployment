@@ -10,7 +10,7 @@ class Obstacle{
         this.collisionX;
         this.collisionY;
         this.collisionRadius = this.scaledWidth*0.5; 
-        this.speedY = Math.random() <0.5? -1 * this.game.ratio : 1*this.game.ratio;
+        this.speedY = Math.random() <0.5? -1 * this.game.ratio : 2*this.game.ratio;
         this.markedForDeletion = false;
         this.image = document.getElementById("obstacle");
         this.frameX = Math.floor(Math.random()*4);
@@ -28,6 +28,9 @@ class Obstacle{
                 this.speedY *= -1;
             }
         }else{
+            if (this.game.audio.mainTheme.paused === false) {
+                this.game.audio.mainTheme.pause();
+            }
             this.speedY +=2;
         }
        

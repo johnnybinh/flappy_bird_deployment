@@ -7,7 +7,7 @@ characterSelection.addEventListener('click', (event) => {
   const clickedElement = event.target;
   if (clickedElement.classList.contains('character')) {
     console.log(clickedElement);
-    chosenCharacter = clickedElement.dataset.character; // Get character data from data-character attribute
+    chosenCharacter = clickedElement.dataset.character; 
     characterSelection.querySelectorAll('.character').forEach(character => character.classList.remove('selected'));
     clickedElement.classList.add('selected'); // Visually indicate selected character
   }
@@ -15,8 +15,6 @@ characterSelection.addEventListener('click', (event) => {
 
 startButton.addEventListener('click', () => {
   if (chosenCharacter) {
-    // Redirect to the game page with the chosen character (replace with your actual logic)
-
     window.location.href = `index.html?character=${chosenCharacter}`;
   } else {
     alert('Please choose a character!');

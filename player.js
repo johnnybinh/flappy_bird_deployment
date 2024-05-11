@@ -97,6 +97,7 @@ class Player{
         this.charging = true;
         this.game.speed = this.game.maxSpeed;
         this.wingsCharge();
+        this.game.audio.charge.play();
     }
     stopCharge(){
         this.charging = false;
@@ -120,6 +121,7 @@ class Player{
     flap(){
         this.stopCharge();
         if(!this.isTouchingTop()){
+        this.game.audio.flap.play();
         this.speedY = -this.flapSpeed; 
         this.wingsDown();
         }
