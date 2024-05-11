@@ -29,6 +29,8 @@ class Player{
             this.image = document.getElementById('player2');
         } else if (chosenCharacter === '3') {
             this.image = document.getElementById('player3');
+        } else if (chosenCharacter === '4') {
+            this.image = document.getElementById('player4');
         } else {
             console.error("Invalid character selection");
         }
