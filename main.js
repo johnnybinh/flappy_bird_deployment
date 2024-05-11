@@ -24,6 +24,7 @@ class Game{
         this.score = 0;
         this.resize(window.innerWidth, window.innerHeight);
 
+       
 //--------------------------------------------------------------------------------------------------------------------------    
     // resize the canvas as we resize the window
         window.addEventListener("resize", e => {

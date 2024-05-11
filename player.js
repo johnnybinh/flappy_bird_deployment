@@ -17,10 +17,25 @@ class Player{
         this.minEnregy = 15
         this.charging;
         this.barSize;
-        this.image = document.getElementById("player");
+        this.image;
         this.frameY;
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const chosenCharacter = urlParams.get('character'); 
+        
+        if (chosenCharacter === '1') {
+            this.image = document.getElementById('player1');
+        } else if (chosenCharacter === '2') {
+            this.image = document.getElementById('player2');
+        } else if (chosenCharacter === '3') {
+            this.image = document.getElementById('player3');
+        } else {
+            console.error("Invalid character selection");
+        }
     }
+
     draw(){
+        
         this.game.ctx.drawImage(this.image, 0, this.frameY*this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         this.game.ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
         this.game.ctx.beginPath();
