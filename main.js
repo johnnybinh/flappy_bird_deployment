@@ -161,13 +161,13 @@ class Game{
                 this.message2 = "Can you do it better than " + this.formatTimer() + " seconds?";
             }
             this.ctx.textAlign = 'center';
-            this.ctx.font = '50px Bungee';
+            this.ctx.font = '80px Bungee';
             this.ctx.fillStyle = 'white';
             this.ctx.fillText(this.message1, this.width*0.5, this.height*0.5 -40);
-            this.ctx.font = '20px Bungee';
+            this.ctx.font = '25px Bungee';
             this.ctx.fillStyle = 'white';
-            this.ctx.fillText(this.message2, this.width*0.5, this.height*0.5 -20);
-            this.ctx.fillText("Press 'R' to try again!", this.width*0.5, this.height*0.5);
+            this.ctx.fillText(this.message2, this.width*0.5, this.height*0.5 -5);
+            this.ctx.fillText("Press 'R' to try again!", this.width*0.5, this.height*0.5 +20);
         }
         if(!this.gameOver){
             if(this.player.energy <= 20) this.ctx.fillStyle = 'red';
