@@ -1,6 +1,10 @@
 # 🛸Outmaneuver the Cosmos! - A Space Adventure Game☄️
 ### Explore the vast expanse of space and test your reflexes and piloting skills to the limit. 
 Can you outrun the dangers and become the ultimate space explorer?
+
+
+<img width="1457" alt="Screenshot 2024-05-12 at 11 59 05 PM" src="https://github.com/atinyanhanh/not_a_flappybird/assets/145834138/cdee956c-72d9-475e-8c43-7a433df32864">
+
 <br />   
 
 ## Table of content
