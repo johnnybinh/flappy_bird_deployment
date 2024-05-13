@@ -80,7 +80,7 @@ class Game{
         this.ratio = this.height/this.baseHeight;
         
         this.gravity = 0.15 * this.ratio;
-        this.speed = 5*this.ratio;
+        this.speed = 3*this.ratio;
         this.minSpeed = this.speed;
         this.maxSpeed = this.speed * 5;
         this.background.resize();
