@@ -10,6 +10,10 @@ class Game{
         this.obstacles = [];
         this.numberOfObstacles = 50;
         this.player = new Player(this);
+        this.rocket = new Rocket(this, this.width, this.height/2)
+        this.rockets = [];
+        this.rocketSpawnTimer = 0;
+        this.rocketSpawnInterval = 10000;
         this.audio = new Audio();
         this.gravity;
         this.speed;
@@ -23,7 +27,10 @@ class Game{
         this.eventTimer = 0;
         this.eventInterval = 150;
         this.score = 0;
+        this.grid = [];
+        this.gridSize = 50;
         this.resize(window.innerWidth, window.innerHeight);
+        this.createGrid();
 
        
 //--------------------------------------------------------------------------------------------------------------------------    
@@ -65,7 +72,16 @@ class Game{
         });
 }
 //--------------------------------------------------------------------------------------------------------------------------
-    
+    //--------------------------------------------------------------------------------------------------------------------------    
+    // create grid for pathfinding
+
+    createGrid(){
+        const rows = Math.floor(this.height / this.gridSize);
+        const cols = Math.floor(this.width / this.gridSize);
+        this.grid = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
+    }
+
+
     // scale all variables as changing screen size
     resize(width, height){
 
@@ -105,11 +121,35 @@ class Game{
         this.drawStatusText();
         this.player.update();
         this.player.draw();
+        this.rockets.forEach(rocket => {
+            rocket.update();
+            rocket.draw();
+        });
+        this.updateRocketSprawn(deltaTime);
         this.obstacles.forEach(obstacles => {
             obstacles.update();
             obstacles.draw();
         })
 
+    }
+
+    updateRocketSprawn(deltaTime) {
+      
+        this.rocketSpawnTimer += deltaTime;
+
+        if (this.rocketSpawnTimer >= this.rocketSpawnInterval) {
+            this.spawnRocket();
+            this.rocketSpawnTimer = 0;
+        }
+    }
+
+    spawnRocket() {
+        const startX = Math.random() * this.width;
+        const startY = Math.random() * this.height;
+        
+        const newRocket = new Rocket(this, startX, startY);
+        
+        this.rockets.push(newRocket);
     }
 
     createObstacles(){
