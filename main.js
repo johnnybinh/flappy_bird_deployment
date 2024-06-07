@@ -180,11 +180,7 @@ class Game {
     }
 
     spawnRocket() {
-        const startX = this.width - 50; // Fixed x position at the right edge
-        const startY = this.height / 2; // Fixed y position at the middle
-
-        const newRocket = new Rocket(this, startX, startY);
-
+        const newRocket = new Rocket(this);
         this.rockets.push(newRocket);
     }
 
