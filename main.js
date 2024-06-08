@@ -22,6 +22,7 @@ class Game {
         this.timer;
         this.message1;
         this.message2;
+        this.message3;
         this.eventUpdate = false;
         this.eventTimer = 0;
         this.eventInterval = 150;
@@ -181,11 +182,18 @@ class Game {
 
         this.rocketSpawnTimer += deltaTime;
 
-        if (this.rocketSpawnTimer >= this.rocketSpawnInterval) {
+        const rocketsOnScreen = this.rockets.filter(rocket => !rocket.markedForDeletion);
+
+        if (this.rocketSpawnTimer >= this.rocketSpawnInterval && rocketsOnScreen.length === 0) {
             this.spawnRocket();
             this.rocketSpawnTimer = 0;
         }
-    }
+
+        // Remove rockets that are marked for deletion
+        this.rockets = this.rockets.filter(rocket => !rocket.markedForDeletion);
+        }
+    
+    
 
     spawnRocket() {
         const newRocket = new Rocket(this);
@@ -232,22 +240,29 @@ class Game {
                 this.audio.gameOver.play();
                 this.message1 = "Getting rusty?";
                 this.message2 = "Collision time is " + this.formatTimer() + " seconds";
+                this.message3 = "Your score is " + this.score + " points";
             } else if (this.obstacles.length <= 0) {
                 this.audio.win.play();
                 this.message1 = "You nailed it!";
                 this.message2 = "Can you do it faster than " + this.formatTimer() + " seconds?";
+                this.message3 = "Your score is " + this.score + " points";
             } else if (this.player.isTouchingBottom) {
                 this.message1 = "Are you OK?";
                 this.message2 = "Can you do it better than " + this.formatTimer() + " seconds?";
+                this.message3 = "Your score is " + this.score + " points";
             }
             this.ctx.textAlign = 'center';
             this.ctx.font = '80px Bungee';
             this.ctx.fillStyle = 'white';
             this.ctx.fillText(this.message1, this.width * 0.5, this.height * 0.5 - 40);
             this.ctx.font = '25px Bungee';
+            this.ctx.fillStyle = 'red';
+            this.ctx.fillText(this.message3, this.width * 0.5, this.height * 0.5 - 5);
+            this.ctx.font = '25px Bungee';
             this.ctx.fillStyle = 'white';
-            this.ctx.fillText(this.message2, this.width * 0.5, this.height * 0.5 - 5);
-            this.ctx.fillText("Press 'R' to try again!", this.width * 0.5, this.height * 0.5 + 20);
+            this.ctx.fillText(this.message2, this.width * 0.5, this.height * 0.5 + 22);
+            this.ctx.fillStyle = 'yellow';
+            this.ctx.fillText("Press 'R' to try again!", this.width * 0.5, this.height * 0.5 + 50);
         }
         if (!this.gameOver) {
             if (this.player.energy <= 20) this.ctx.fillStyle = 'red';

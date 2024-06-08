@@ -9,7 +9,7 @@ class Obstacle{
         this.y = Math.random()* (this.game.height - this.scaledHeight);
         this.collisionX;
         this.collisionY;
-        this.collisionRadius = this.scaledWidth*0.5; 
+        this.collisionRadius = this.scaledWidth*0.45; 
         this.speedY = Math.random() <0.5? -1 * this.game.ratio : 2*this.game.ratio;
         this.markedForDeletion = false;
         this.image = document.getElementById("obstacle");
@@ -52,7 +52,7 @@ class Obstacle{
         this.game.ctx.drawImage(this.image, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight);
         this.game.ctx.beginPath();
         this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);
-        //this.game.ctx.stroke();
+        this.game.ctx.stroke();
     }
     resize(){
         this.scaledWidth = this.spriteWidth * this.game.ratio;

@@ -19,6 +19,7 @@ class Player{
         this.barSize;
         this.image;
         this.frameY;
+        this.passedRockets = 0;
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const chosenCharacter = urlParams.get('character'); 
@@ -62,6 +63,20 @@ class Player{
               // Handle collision logic (e.g., decrease energy, play sound effect)
             }
           }
+          for (let i = this.game.rockets.length - 1; i >= 0; i--) {
+            const rocket = this.game.rockets[i];
+            if (this.game.checkCollision(this, rocket)) {
+                this.collided = true;
+                this.game.gameOver = true;
+                rocket.markedForDeletion = true;
+                this.getHit();
+            } else if (rocket.x < this.x && !rocket.passedPlayer) {
+                // Rocket passed the player without collision
+                rocket.passedPlayer = true; // Mark it to avoid counting again
+                this.passedRockets++;
+                this.game.score += 3; // Increase score by 3 points
+            }
+        }
         if (this.collided) this.frameY = 4;
         
         //bottom boudary
@@ -78,8 +93,8 @@ class Player{
         this.y = this.game.height*0.5 - this.height*0.5;
         this.speedY = -8 * this.game.ratio;
         this.flapSpeed = 5*this.game.ratio;
-        this.collisionRadius = 62 * this.game.ratio;
-        this.collisionX = this.x + this.width * 0.5;
+        this.collisionRadius = 55 * this.game.ratio;
+        this.collisionX = this.x + this.width * 0.55;
         this.collided = false;
         this.barSize = Math.floor(10*this.game.ratio);
         this.energy = 30;
