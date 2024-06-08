@@ -62,7 +62,7 @@ class Player{
               // Handle collision logic (e.g., decrease energy, play sound effect)
             }
           }
-        if (this.collided) this.frameY = 4;
+        //if (this.collided) this.frameY = 4;
         
         //bottom boudary
         if(this.isTouchingBottom()){

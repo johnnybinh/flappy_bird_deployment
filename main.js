@@ -97,6 +97,7 @@ class Game {
                 while (node) {
                     path.unshift({ x: node.x * this.gridSize, y: node.y * this.gridSize });
                     node = node.parent;
+                    //node.next. = nextposition;
                 }
                 return path;
             }
@@ -151,12 +152,16 @@ class Game {
             this.timer += deltaTime;
             this.audio.playMainTheme();
         }
+ 
         this.handlePeriodicEvent(deltaTime);
         this.background.update();
         this.background.draw();
         this.drawStatusText();
         this.player.update();
         this.player.draw();
+        if (this.gameOver) {
+            return;
+        }
         this.rockets.forEach(rocket => {
             rocket.update();
             rocket.draw();
