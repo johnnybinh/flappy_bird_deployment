@@ -141,6 +141,9 @@ class Game {
         this.obstacles.forEach(obstacles => {
             obstacles.resize();
         });
+        this.rockets.forEach(rocket => {
+            rocket.resize();
+        });
         this.score = 0;
         this.gameOver = false;
         this.timer = 0;
@@ -162,15 +165,15 @@ class Game {
         if (this.gameOver) {
             return;
         }
-        this.rockets.forEach(rocket => {
-            rocket.update();
-            rocket.draw();
-        });
         this.updateRocketSprawn(deltaTime);
         this.obstacles.forEach(obstacles => {
             obstacles.update();
             obstacles.draw();
         })
+        this.rockets.forEach(rocket => {
+            rocket.update();
+            rocket.draw();
+        });
 
     }
 

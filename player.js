@@ -42,7 +42,7 @@ class Player{
         this.game.ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
         this.game.ctx.beginPath();
         this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);
-        //this.game.ctx.stroke();
+        this.game.ctx.stroke();
     }
 
     update(){
@@ -62,7 +62,7 @@ class Player{
               // Handle collision logic (e.g., decrease energy, play sound effect)
             }
           }
-        //if (this.collided) this.frameY = 4;
+        if (this.collided) this.frameY = 4;
         
         //bottom boudary
         if(this.isTouchingBottom()){

@@ -5,21 +5,43 @@ class Rocket {
         this.y = this.game.height / 2;
         this.width = 50;
         this.height = 50;
+        this.spriteWidth = 180;
+        this.spriteHeight = 120;
+        this.scaledWidth = this.spriteWidth * this.game.ratio;
+        this.scaledHeight = this.spriteHeight * this.game.ratio;
+        this.collisionX;
+        this.collisionY;
+        this.collisionRadius = this.scaledWidth*0.2; 
+        this.speedY = Math.random() <0.5? -1 * this.game.ratio : 2*this.game.ratio;
+        this.image = document.getElementById("rocket");
+        this.markedForDeletion = false;
         this.speed = 3;
         this.path = [];
         this.gridSize = this.game.gridSize;
     }
 
     draw() {
-        this.game.ctx.fillStyle = 'red';
-        this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+       // this.game.ctx.fillStyle = 'red';
+       // this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.game.ctx.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight);
+        this.game.ctx.beginPath();
+        this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);
+        this.game.ctx.stroke();
+    }
+
+    resize(){
+        this.scaledWidth = this.spriteWidth * this.game.ratio;
+        this.scaledHeight = this.spriteHeight * this.game.ratio;
     }
 
     update() {
         this.updatePath(); 
 
-        if (this.path.length > 0) {
-            const nextPosition = this.path[0];
+       this.collisionX = this.x + this.scaledWidth*0.4;
+       this.collisionY = this.y + this.scaledHeight * 0.5;
+
+        if (this.path.length > 1) {
+            const nextPosition = this.path[1];
             const dx = nextPosition.x - this.x;
             const dy = nextPosition.y - this.y;
             const distance = Math.hypot(dx, dy);
