@@ -22,8 +22,6 @@ class Rocket {
     }
 
     draw() {
-       // this.game.ctx.fillStyle = 'red';
-       // this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
         this.game.ctx.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight);
         this.game.ctx.beginPath();
         this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);

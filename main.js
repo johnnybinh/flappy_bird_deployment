@@ -148,13 +148,18 @@ class Game {
         this.score = 0;
         this.gameOver = false;
         this.timer = 0;
-
     }
     render(deltaTime) {
-
         if (!this.gameOver) {
             this.timer += deltaTime;
             this.audio.playMainTheme();
+        } else {
+            this.audio.mainThemeStopTimer += deltaTime;
+
+            if (this.audio.mainThemeStopTimer >= 10000 && !this.audio.mainThemeStopped) {
+                this.audio.stopMainTheme();
+                this.mainThemeStopped = true;
+            }
         }
  
         this.handlePeriodicEvent(deltaTime);
@@ -174,6 +179,13 @@ class Game {
         this.rockets.forEach(rocket => {
             rocket.update();
             rocket.draw();
+             
+            if (this.checkCollision(this.player, rocket)) {
+                this.audio.crash.play();  // Play crash sound
+                this.gameOver = true;  // Set game over
+                rocket.markedForDeletion = true;
+            }
+
         });
 
     }
@@ -236,6 +248,7 @@ class Game {
         this.ctx.fillText("Timer: " + this.formatTimer(), 10, 30);
         if (this.gameOver) {
             if (this.player.collided) {
+                //if(checkCollision(this.player, this.rockets)){this.audio.crash.play();}
                 this.audio.hit.play();
                 this.audio.gameOver.play();
                 this.message1 = "Getting rusty?";

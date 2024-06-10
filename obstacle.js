@@ -9,7 +9,7 @@ class Obstacle{
         this.y = Math.random()* (this.game.height - this.scaledHeight);
         this.collisionX;
         this.collisionY;
-        this.collisionRadius = this.scaledWidth*0.45; 
+        this.collisionRadius = this.scaledWidth*0.4; 
         this.speedY = Math.random() <0.5? -1 * this.game.ratio : 2*this.game.ratio;
         this.markedForDeletion = false;
         this.image = document.getElementById("obstacle");

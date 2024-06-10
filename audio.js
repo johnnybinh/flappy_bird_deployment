@@ -9,6 +9,10 @@ class Audio {
         this.mainTheme = document.getElementById("mainTheme");
         this.startGame = document.getElementById("start");
         this.win = document.getElementById("win");
+        this.crash = document.getElementById("crash");
+        this.mainThemeStopTimer = 0;
+        this.mainThemeStopped = false;
+
 
     }
   
@@ -16,4 +20,8 @@ class Audio {
           this.mainTheme.play();
           this.mainTheme.loop = true;
   }
+    stopMainTheme() {
+        this.mainTheme.pause();
+        this.mainTheme.currentTime = 0;
+}
 }
