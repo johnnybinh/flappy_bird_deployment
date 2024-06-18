@@ -25,7 +25,7 @@ class Rocket {
         this.game.ctx.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight);
         this.game.ctx.beginPath();
         this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI*2);
-        this.game.ctx.stroke();
+        //this.game.ctx.stroke();
     }
 
     resize(){
