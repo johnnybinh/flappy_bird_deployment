@@ -63,6 +63,7 @@ git clone https://github.com/atinyanhanh/not_a_flappybird.git
 - Anticipate upcoming obstacles and plan your movements accordingly.
 - Avoid spaceships to earn more points.
 - Stay unpredictable to outmaneuver spaceships using BFS algorithms.
+- Try your best to stay a way from Space ship!!! ![rocket](https://github.com/atinyanhanh/not_a_flappybird/assets/145834138/d06bd7af-19c3-4fda-9fdc-bc4212de42eb)
 
 ## Scoring System
 - **Score Points:** 
