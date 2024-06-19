@@ -7,7 +7,7 @@ Can you outrun the dangers and become the ultimate space explorer?
 
 <br />   
 
-## Table of content
+## 📑Table of content
 * [Features](#features)
 * [Getting Started](#getting-started)
 * [How to Play](#how-to-play)
@@ -65,7 +65,7 @@ git clone https://github.com/atinyanhanh/not_a_flappybird.git
 - Stay unpredictable to outmaneuver spaceships using BFS algorithms.
 - Try your best to stay a way from Space ship!!! ![rocket](https://github.com/atinyanhanh/not_a_flappybird/assets/145834138/d06bd7af-19c3-4fda-9fdc-bc4212de42eb)
 
-## Scoring System
+## 🧮Scoring System
 - **Score Points:** 
 - Avoiding an obstacle gives you +1 point.
 - Avoiding a spaceship gives you +3 points.
