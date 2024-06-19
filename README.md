@@ -3,7 +3,7 @@
 ### Explore the vast expanse of space and test your reflexes and piloting skills to the limit. 
 Can you outrun the dangers and become the ultimate space explorer?
 
-<img width="1457" src="https://github.com/atinyanhanh/not_a_flappybird/assets/145834138/ce19b722-4bb3-4e3c-82b9-495122138c8f" />
+<img width="1457" src="https://github.com/atinyanhanh/not_a_flappybird/assets/145834138/e9dfd981-0e51-4df7-97e0-688facbc553e" />
 
 <br />   
 
