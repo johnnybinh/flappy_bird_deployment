@@ -25,15 +25,23 @@ Can you outrun the dangers and become the ultimate space explorer?
 
 ## 🎬Getting Started
 
-**Play directly in your browser:**
-- **Clone repository:**
+**Step 1: Clone repository:**
 git clone https://github.com/atinyanhanh/not_a_flappybird.git
 
-
-- **Click the link below to launch the game:** [http://127.0.0.1:5500/main-index.html](http://127.0.0.1:5500/main-index.html)
 ![Screen Recording 2024-05-13 at 8 13 02 AM](https://github.com/atinyanhanh/not_a_flappybird/assets/145834138/aa97666f-f27d-4548-bf6b-f4168df2b4d2)
 
+**Step 2: Open main-index.html File**
+**Step 3: Start Live Server**
+- Right-click anywhere inside the main-index.html file.
+- Select "Open with Live Server" from the context menu.
 
+**If you haven't already installed Live Server in Visual Studio Code, you can do so by following these steps:**
+- Open Visual Studio Code.
+- Go to the Extensions view by clicking on the square icon on the left sidebar or by pressing Ctrl+Shift+X.
+- Search for "Live Server" in the Extensions Marketplace.
+- Click "Install" to install the extension.
+
+**Step 3: Start playing**
 
 ## ❓How to Play
 
