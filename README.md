@@ -7,21 +7,32 @@ Can you outrun the dangers and become the ultimate space explorer?
 
 <br />   
 
+## About
+"Not a Flappy Bird" is an innovative and entertaining game that combines the classic, addictive mechanics of Flappy Bird with fresh and dynamic gameplay elements. Players guide a character through a series of challenging obstacles. This game delivers an engaging experience that appeals to fans of traditional arcade games and modern casual gaming. Developed using HTML, CSS, and JavaScript, "Not a Flappy Bird" showcases creative game design, offering a delightful adventure filled with strategy, reflexes, and humor. It is suitable for players of all ages, ensuring fun for everyone.
+
 ## 📑Table of content
+* [File Structure](#file-structure)
 * [Features](#features)
 * [Getting Started](#getting-started)
 * [How to Play](#how-to-play)
 * [Tips](#tips)
 * [Contributing](#contributing)
+* [Build Using](#build-using)
 
+## 📁 File Structure
+📁 src/  
+...   📄 audio.js: Manages the game's audio, including background music and sound effects.  
+...   📄 background.js: Handles the game's background rendering and animations.  
+...   📄 player.js: Manages the player's behavior, movement, and interactions.  
+...   📄 obstacle.js: Defines the behavior and rendering of obstacles the player must avoid.  
+...   📄 rocket.js: additional challenge elements, spaceship which will follow the player.  
+...   📄 game.js: Controls the main game loop, initialization, and game over/win conditions.  
+...   📄 main.js: Entry point of the application.  
  
 ## ⚙️Features:
-- Multiple playable characters.
 - Upbeat theme music and sound effects to immerse you in the space adventure.
 - Scoring system to track your progress.
 - Spaceship enemies implementing BFS algorithm to follow the player.
-
-
 
 ## 🎬Getting Started
 
@@ -69,6 +80,12 @@ git clone https://github.com/atinyanhanh/not_a_flappybird.git
 - **Score Points:** 
 - Avoiding an obstacle gives you +1 point.
 - Avoiding a spaceship gives you +3 points.
+
+## ⛏️ Built Using
+The game is built using the following technologies and tools:
+- HTML: Provides the structure and markup for the game interface.
+- CSS: Styles the game elements, ensuring a visually appealing presentation.
+- JavaScript: Implements the game logic and interactions, making the game dynamic and interactive.
 
 ## 🪄Contributing
 Feel free to fork this repository and contribute your own ideas or improvements. I welcome pull requests!
